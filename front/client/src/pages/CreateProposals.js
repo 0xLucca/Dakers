@@ -1,12 +1,13 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import React, { useContext, useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 import { FirebaseContext } from '../context/firebaseContext';
 
 const CreateProposals = () => {
     const [disabledForm, setdisabledForm] = useState(false);
     const [publication, setpublication] = useState({});
 
-    const { handleWritePublication, publicationFinished } = useContext(FirebaseContext);
+    const { handleWritePublication, publicationFinished,setpublicationFinished } = useContext(FirebaseContext);
     
     useEffect(() => {
         publication.title && handleWritePublication(publication)
@@ -27,8 +28,13 @@ const CreateProposals = () => {
     return (
         <div>
             <div className='w-10/12 md:w-8/12 m-auto'>{
-                publicationFinished?
-                <p className='my-8 font-bold text-3xl'>Bien ahi culiaaaaaa</p>
+                publicationFinished ?
+                <>
+                <p className='my-8 font-bold text-3xl'>Se ha publicado tu pedido</p>
+                <Link to={'/'}>
+                    <button onClick={()=>{setpublicationFinished(!publicationFinished)}} className='mt-5 bg-blue-500 text-slate-50 font-semibold w-full py-3 rounded transition duration-150 hover:bg-blue-700'>Volver al inicio</button>
+                </Link>
+                </>
                 :
                 <>
                 <p className='my-8 font-bold text-3xl'>Crear publicacion de propuesta</p>

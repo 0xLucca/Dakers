@@ -15,7 +15,7 @@ function App() {
 
   useEffect(() => {
     isConnected && user && handleFindExistsUser();
-    console.log(userInfo);
+    console.log('userInfo: ',userInfo);
   }, [isConnected, user]);
 
   return (

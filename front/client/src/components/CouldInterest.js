@@ -1,12 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { FirebaseContext } from '../context/firebaseContext';
+import BrandCard from './BrandCard';
+import PublicationCard from './PublicationCard';
 import UserCard from './UserCard';
 
 const CouldInterest = ({ filters }) => {
-  const { allUsers, userInfo } = useContext(FirebaseContext);
-  //eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDk4NEE1NjI2RDM5MURCMzU3M2JBRGNBOWVCMjY0ZjYxZTUxYzk5NkUiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NjMxMDE3NjcyMTMsIm5hbWUiOiJHb1ZpcmFsIn0.LDNFAC1Lj95LpsGYLod_Oc49ZTSOtYwocpfJMwzUkvA
+  const { allUsers, userInfo, activePublications } = useContext(FirebaseContext);
+
   const [usersToShow, setusersToShow] = useState([]);
   const [areFilters, setareFilters] = useState(false);
+  const [brands, setbrands] = useState([]);
+
 
   const handleUsersFilter = (filters) => {
     if (filters.type) {
@@ -37,8 +41,12 @@ const CouldInterest = ({ filters }) => {
   }, [filters]);
 
   useEffect(() => {
-    console.log('new usersToShow: ', usersToShow);
-  }, [usersToShow]);
+    setbrands(allUsers.filter(brand=>brand.type === 'brand'));
+  }, [allUsers]);
+
+
+
+
 
   const title =
     userInfo.type === 'influencer' ? (
@@ -56,11 +64,11 @@ const CouldInterest = ({ filters }) => {
       {title}
       {areFilters &&
         usersToShow.length > 0 &&
-        usersToShow.map((utw) => <UserCard user={utw} key={utw} />)}
+        usersToShow.map((utw) => <PublicationCard user={utw} key={utw} />)}
       {areFilters && usersToShow.length === 0 && (
-        <p>No se encontro nada :(, intenta de nuevo</p>
+        <p>No se encontro nada, intenta de nuevo</p>
       )}
-      {!areFilters && allUsers.map((utw) => <UserCard user={utw} key={utw} />)}
+      {!areFilters && activePublications.map((ap) => <PublicationCard ap={ap} key={ap} />)}
     </div>
   );
 };

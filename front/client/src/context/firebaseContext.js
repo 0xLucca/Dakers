@@ -16,6 +16,7 @@ import {shortid} from 'shortid'
 export const FirebaseContext = createContext({});
 
 export const FirebaseProvider = ({ children }) => {
+  const { address } = useAccount();
   const { connectAsync } = useConnect();
   const { disconnectAsync } = useDisconnect();
   const { isConnected } = useAccount();
@@ -30,6 +31,8 @@ export const FirebaseProvider = ({ children }) => {
   const [registerFinished, setregisterFinished] = useState(false);
   const [publicationFinished, setpublicationFinished] = useState(false);
   const [allUsers, setallUsers] = useState([]);
+  const [activePublications, setactivePublications] = useState([]);
+
 
   const handlesignout = async () => {
     signOut(auth);
@@ -122,9 +125,10 @@ export const FirebaseProvider = ({ children }) => {
         console.log(error);
       });
   };
+
   const handleWritePublication = (data) => {
     const shortid = require('shortid');
-    set(ref(database, 'publications/' +  user.uid + '/' + shortid.generate()), data)
+    set(ref(database, 'publications/' + shortid.generate()), { ...data, wallet:address } )
       .then(() => {
         setpublicationFinished(!publicationFinished);
         console.log('New user in db');
@@ -149,6 +153,21 @@ export const FirebaseProvider = ({ children }) => {
       });
   };
 
+  const handleActivePublications = () => {
+    const dbRef = ref(database);
+    get(child(dbRef, `publications/`))
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        setactivePublications(Object.values(snapshot.val()));
+      } else {
+        console.log('No data available');
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  } 
+
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -164,6 +183,17 @@ export const FirebaseProvider = ({ children }) => {
   useEffect(() => {
     user === null && setuserInfo(null);
   }, [user]);
+
+  useEffect(() => {
+    allUsers.length > 1 &&
+    console.log('hola');
+  }, [allUsers]);
+
+  useEffect(() => {
+    handleActivePublications()
+  }, []);
+
+
 
   //useEffect(() => {}, [user, wallet, existsUser]);
 
@@ -186,6 +216,8 @@ export const FirebaseProvider = ({ children }) => {
     registerFinished,
     allUsers,
     publicationFinished,
+    activePublications,
+    setpublicationFinished,
     handlesignout,
     handleAuth,
     handleExistUser,
@@ -193,7 +225,8 @@ export const FirebaseProvider = ({ children }) => {
     handleFindExistsUser,
     handleGetAllUsers,
     handleImageStorage,
-    handleWritePublication
+    handleWritePublication,
+    handleActivePublications
   };
 
   return (
