@@ -9,7 +9,7 @@ import CreateProposals from './pages/CreateProposals';
 import Dashboard from './pages/Dashboard';
 import Home from './pages/Home';
 import PropousalInfo from './pages/PropousalInfo';
-import RecivedP from './pages/RecivedP';
+import RecivedP from './pages/RecivedP copy';
 import RecivedPs from './pages/RecivedPs';
 import Register from './pages/Register';
 

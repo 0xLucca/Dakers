@@ -131,10 +131,20 @@ export const FirebaseProvider = ({ children }) => {
   const handleWritePublication = (data) => {
     const shortid = require('shortid');
     const id = shortid.generate()
-    set(ref(database, 'publications/' + id), { ...data, wallet:address, id:id, payment: '50 MATIC' } )
+    set(ref(database, 'publications/' + id), { ...data, wallet:address, id:id, payment: '50 MATIC',accepted:false } )
       .then(() => {
         setpublicationFinished(!publicationFinished);
         console.log('New user in db');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const handleAcceptPublication = (data,id) => {
+    set(ref(database, 'publications/' + id), { ...data, accepted:true } )
+      .then(() => {
+        console.log('Publicacion apceptada');
       })
       .catch((error) => {
         console.log(error);
@@ -262,6 +272,7 @@ export const FirebaseProvider = ({ children }) => {
     handleActivePublications,
     handlePropusalInfo,
     handlePropoulsals,
+    handleAcceptPublication
   };
 
   return (
