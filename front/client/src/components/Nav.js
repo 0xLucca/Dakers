@@ -12,12 +12,12 @@ const Nav = () => {
           <button
             onClick={() => handleAuth()}
             className="
-          bg-blue-500
+          bg-green-500
           py-1.5
           px-3
           rounded
           text-slate-50
-          hover:bg-blue-700
+          hover:bg-green-700
           transition duration-150
           "
           >
@@ -37,6 +37,7 @@ const Nav = () => {
               
               {userInfo&&
               userInfo.type === 'brand'? (
+                <>
               <Link to='/careateP'>
                 <button
                   className="
@@ -44,12 +45,27 @@ const Nav = () => {
                   px-3
                   mx-2
                   transition duration-150
-                  hover:text-blue-500
+                  hover:text-green-500
                   "
                   >
                   Crear propuesta
                 </button>
-              </Link>)
+              </Link>
+              <Link to='/recivedPs'>
+                <button
+                  className="
+                  py-1
+                  px-3
+                  mx-2
+                  transition duration-150
+                  hover:text-green-500
+                  "
+                  >
+                  Propuestas recibidas
+                </button>
+              </Link>
+              </>
+              )
               :
               (
               <Link to='/acceptedP'>
@@ -59,28 +75,30 @@ const Nav = () => {
                   px-3
               mx-2
               transition duration-150
-              hover:text-blue-500
+              hover:text-green-500
               "
               >
                   Propuestas aceptadas
                 </button>
               </Link>)
                 }
+                <Link to='/'>
               <button
                 onClick={handlesignout}
                 className="
-              bg-slate-300
-              py-1
-              px-3
-              mx-2
-              rounded
-              transition duration-150
-              hover:bg-slate-700
-              hover:text-slate-50
-              "
-              >
+                bg-slate-300
+                py-1
+                px-3
+                mx-2
+                rounded
+                transition duration-150
+                hover:bg-slate-700
+                hover:text-slate-50
+                "
+                >
                 Salir
               </button>
+                </Link>
             </div>
           </>
         )}

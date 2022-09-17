@@ -7,7 +7,7 @@ const CreateProposals = () => {
     const [disabledForm, setdisabledForm] = useState(false);
     const [publication, setpublication] = useState({});
 
-    const { handleWritePublication, publicationFinished,setpublicationFinished } = useContext(FirebaseContext);
+    const { handleWritePublication, publicationFinished,setpublicationFinished, userInfo } = useContext(FirebaseContext);
     
     useEffect(() => {
         publication.title && handleWritePublication(publication)
@@ -15,13 +15,13 @@ const CreateProposals = () => {
 
     const handlePublication=(values)=>{
         setpublication({
+            brandName:userInfo.name,
             title:values.title,
             desc:values.desc,
             minims:[values.req1,values.req2,values.req3],
             format:values.format,
             duration:values.duration,
             socialMedias:values.socialMedias
-
         })
     }
 
@@ -32,7 +32,7 @@ const CreateProposals = () => {
                 <>
                 <p className='my-8 font-bold text-3xl'>Se ha publicado tu pedido</p>
                 <Link to={'/'}>
-                    <button onClick={()=>{setpublicationFinished(!publicationFinished)}} className='mt-5 bg-blue-500 text-slate-50 font-semibold w-full py-3 rounded transition duration-150 hover:bg-blue-700'>Volver al inicio</button>
+                    <button onClick={()=>{setpublicationFinished(!publicationFinished)}} className='mt-5 bg-green-500 text-slate-50 font-semibold w-full py-3 rounded transition duration-150 hover:bg-green-700'>Volver al inicio</button>
                 </Link>
                 </>
                 :
@@ -61,8 +61,8 @@ const CreateProposals = () => {
           return errors;
         }}
         onSubmit={(values, { setSubmitting }) => {
-handlePublication(values)
-console.log(values);
+          handlePublication(values)
+          console.log(values);
         }}
       >
         {({ isSubmitting,values }) => (
@@ -77,7 +77,7 @@ console.log(values);
               border-slate-300
               px-3 py-2 
               my-2
-              focus:border-blue-500
+              focus:border-green-500
               focus:ring-0
               "
             />
@@ -110,7 +110,7 @@ console.log(values);
             border-slate-300
             px-3 py-2 
             my-2
-            focus:border-blue-500
+            focus:border-green-500
             focus:ring-0
             "
             />
@@ -180,7 +180,7 @@ console.log(values);
             border-slate-300
             px-3 py-2 
             my-2
-            focus:border-blue-500
+            focus:border-green-500
             focus:ring-0
             "
           />
@@ -199,7 +199,7 @@ console.log(values);
             border-slate-300
             px-3 py-2 
             my-2
-            focus:border-blue-500
+            focus:border-green-500
             focus:ring-0
             "
           />
@@ -212,7 +212,7 @@ console.log(values);
             border-slate-300
             px-3 py-2 
             my-2
-            focus:border-blue-500
+            focus:border-green-500
             focus:ring-0
             "
           />
@@ -225,7 +225,7 @@ console.log(values);
             border-slate-300
             px-3 py-2 
             my-2
-            focus:border-blue-500
+            focus:border-green-500
             focus:ring-0
             "
           />
@@ -235,7 +235,7 @@ console.log(values);
               className={
                 disabledForm || isSubmitting
                   ? 'mt-5 bg-slate-300 text-slate-500 font-semibold w-full py-3 rounded '
-                  : 'mt-5 bg-blue-500 text-slate-50 font-semibold w-full py-3 rounded transition duration-150 hover:bg-blue-700'
+                  : 'mt-5 bg-green-500 text-slate-50 font-semibold w-full py-3 rounded transition duration-150 hover:bg-green-700'
               }
             >
               Submit

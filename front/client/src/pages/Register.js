@@ -125,7 +125,7 @@ const Register = () => {
               border-slate-300
               px-3 py-2 
               my-2
-              focus:border-blue-500
+              focus:border-green-500
               focus:ring-0
               "
             />
@@ -143,7 +143,7 @@ const Register = () => {
               border-slate-300
               px-3 py-2 
               my-2
-              focus:border-blue-500
+              focus:border-green-500
               focus:ring-0
               "
             />
@@ -161,7 +161,7 @@ const Register = () => {
               border-slate-300
               px-3 py-2 
               my-2
-              focus:border-blue-500
+              focus:border-green-500
               focus:ring-0
               "
             />
@@ -179,7 +179,7 @@ const Register = () => {
               border-slate-300
               px-3 py-2 
               my-2
-              focus:border-blue-500
+              focus:border-green-500
               focus:ring-0
               "
             />
@@ -258,7 +258,7 @@ const Register = () => {
               className={
                 disabledForm || isSubmitting || user === null
                   ? 'mt-5 bg-slate-300 text-slate-500 font-semibold w-full py-3 rounded '
-                  : 'mt-5 bg-blue-500 text-slate-50 font-semibold w-full py-3 rounded transition duration-150 hover:bg-blue-700'
+                  : 'mt-5 bg-green-500 text-slate-50 font-semibold w-full py-3 rounded transition duration-150 hover:bg-green-700'
               }
             >
               Submit
@@ -267,7 +267,7 @@ const Register = () => {
         )}
       </Formik>
       {registerFinished && (
-        <button className="mt-5 bg-blue-500 text-slate-50 font-semibold w-full py-3 rounded transition duration-150 hover:bg-blue-700">
+        <button className="mt-5 bg-green-500 text-slate-50 font-semibold w-full py-3 rounded transition duration-150 hover:bg-green-700">
           <Link to={'/'}>Continuar</Link>
         </button>
       )}

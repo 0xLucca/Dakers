@@ -8,13 +8,13 @@ const StartLike = () => {
       <br />
       <div className="w-8/12 md:w-5/12 flex justify-between font-semibold text-xl md:text-2xl mt-10">
         <Link
-          className="hover:text-blue-500 transition duration-150"
+          className="hover:text-green-500 transition duration-150"
           to={'/register/brand'}
         >
           MARCA
         </Link>
         <Link
-          className="hover:text-blue-500 transition duration-150"
+          className="hover:text-green-500 transition duration-150"
           to={'/register/influencer'}
         >
           INFLUENCER

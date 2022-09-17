@@ -10,7 +10,6 @@ import { getDatabase, ref, set, onValue, child, get } from 'firebase/database';
 import { useAccount, useConnect, useDisconnect, useSignMessage } from 'wagmi';
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask';
 import { Web3Storage } from 'web3.storage';
-import {shortid} from 'shortid'
 // Construct with token and endpoint
 
 export const FirebaseContext = createContext({});
@@ -32,6 +31,9 @@ export const FirebaseProvider = ({ children }) => {
   const [publicationFinished, setpublicationFinished] = useState(false);
   const [allUsers, setallUsers] = useState([]);
   const [activePublications, setactivePublications] = useState([]);
+  const [propousalInfo, setpropousalInfo] = useState([]);
+
+  
 
 
   const handlesignout = async () => {
@@ -128,7 +130,8 @@ export const FirebaseProvider = ({ children }) => {
 
   const handleWritePublication = (data) => {
     const shortid = require('shortid');
-    set(ref(database, 'publications/' + shortid.generate()), { ...data, wallet:address } )
+    const id = shortid.generate()
+    set(ref(database, 'publications/' + id), { ...data, wallet:address, id:id } )
       .then(() => {
         setpublicationFinished(!publicationFinished);
         console.log('New user in db');
@@ -167,6 +170,35 @@ export const FirebaseProvider = ({ children }) => {
       console.error(error);
     });
   } 
+
+  const handlePropusalInfo = (id) => {
+    const dbRef = ref(database);
+    get(child(dbRef, `publications/`+id))
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          setpropousalInfo((snapshot.val()));
+        } else {
+          console.log('No data available');
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+  const handlePropoulsals = (data) => {
+    const shortid = require('shortid');
+    const newId = shortid.generate()
+    set(ref(database, 'publications/' + data.id + '/propousals/'+ newId ), { ...data, pId:newId } )
+  .then(() => {
+    console.log('New prop');
+  })
+  .catch((error) => {
+    console.log(error);
+  })
+  }
+
+
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -217,6 +249,7 @@ export const FirebaseProvider = ({ children }) => {
     allUsers,
     publicationFinished,
     activePublications,
+    propousalInfo,
     setpublicationFinished,
     handlesignout,
     handleAuth,
@@ -226,7 +259,9 @@ export const FirebaseProvider = ({ children }) => {
     handleGetAllUsers,
     handleImageStorage,
     handleWritePublication,
-    handleActivePublications
+    handleActivePublications,
+    handlePropusalInfo,
+    handlePropoulsals,
   };
 
   return (

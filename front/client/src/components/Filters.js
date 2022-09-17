@@ -125,7 +125,7 @@ const Filters = ({ handleFilters }) => {
             />
             <button
               type="submit"
-              className="mt-5 hover:text-blue-500 transition duration-150"
+              className="mt-5 hover:text-green-500 transition duration-150"
             >
               aplicar
             </button>
