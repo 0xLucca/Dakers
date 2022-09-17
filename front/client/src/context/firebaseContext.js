@@ -131,7 +131,7 @@ export const FirebaseProvider = ({ children }) => {
   const handleWritePublication = (data) => {
     const shortid = require('shortid');
     const id = shortid.generate()
-    set(ref(database, 'publications/' + id), { ...data, wallet:address, id:id } )
+    set(ref(database, 'publications/' + id), { ...data, wallet:address, id:id, payment: '50 MATIC' } )
       .then(() => {
         setpublicationFinished(!publicationFinished);
         console.log('New user in db');
@@ -189,7 +189,7 @@ export const FirebaseProvider = ({ children }) => {
   const handlePropoulsals = (data) => {
     const shortid = require('shortid');
     const newId = shortid.generate()
-    set(ref(database, 'publications/' + data.id + '/propousals/'+ newId ), { ...data, pId:newId } )
+    set(ref(database, 'publications/' + data.id + '/propousals/' ), { ...data, pId:newId } )
   .then(() => {
     console.log('New prop');
   })

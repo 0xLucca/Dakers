@@ -37,7 +37,7 @@ const PropousalInfo = () => {
                         <p className='my-4 font-bold text-xl'>Descripcion:</p>
                         <p className='my-4 font-semibold'>{propousalInfo.desc}</p>
                         <p className='my-4 font-bold text-xl'>Pago:</p>
-                        <p className='my-4 font-semibold'>{propousalInfo.format}</p>
+                        <p className='my-4 font-semibold'>{propousalInfo.payment}</p>
                         <p className='my-4 font-bold text-xl'>Formato:</p>
                         <p className='my-4 font-semibold'>{propousalInfo.format}</p>
                         {

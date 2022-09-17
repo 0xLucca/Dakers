@@ -1,41 +1,37 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { FirebaseContext } from "../context/firebaseContext";
+import logo from '../assests/logo.png'
 
 const Nav = () => {
   const { handlesignout, handleAuth, wallet,userInfo } = useContext(FirebaseContext);
   return (
-    <div className="bg-slate-50 border border-b  h-14 flex font-poppins font-medium">
+    <div className="bg-slate-50 border border-b h-16 flex font-poppins font-medium">
       <div className="w-11/12 flex m-auto justify-between">
+        <Link to={'/'} className='w-16 h-16'>
+          <img src={logo} className='w-16 h-16'></img>
+        </Link>
         {" "}
         {!wallet ? (
           <button
             onClick={() => handleAuth()}
             className="
           bg-green-500
-          py-1.5
+          p-1.5
           px-3
           rounded
           text-slate-50
           hover:bg-green-700
           transition duration-150
+          my-auto
           "
           >
             Ingresar con Metamask
           </button>
         ) : (
           <>
-            <div
-              className="
-              
-              py-1
-              "
-              >
-              {wallet.substring(0, 4) + "..." + wallet.substring(38, 42)}
-            </div>
-            <div>
-              
-              {userInfo&&
+            <div className='my-auto'>
+              {userInfo &&
               userInfo.type === 'brand'? (
                 <>
               <Link to='/careateP'>

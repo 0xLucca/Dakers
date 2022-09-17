@@ -44,7 +44,7 @@ const CreateProposals = () => {
           desc:'',
           format:'',
           duration:'',
-          socialMedias: [],
+          socialMedias: ['lens'],
           req1:'',
           req2:'',
           req3:'',
@@ -121,8 +121,8 @@ const CreateProposals = () => {
             />
             </>
         }
-        <p className='my-2 font-semibold text-xl'>Redes sociales destinadas</p>
-        <div role="group" aria-labelledby="checkbox-group" className="flex flex-col">
+        <p className='my-2 font-semibold text-xl hidden'>Redes sociales destinadas</p>
+        <div role="group" aria-labelledby="checkbox-group" className="flex flex-col hidden">
               <label className="">
                 <Field
                   type="checkbox"

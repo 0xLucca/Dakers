@@ -47,21 +47,8 @@ const CouldInterest = ({ filters }) => {
 
 
 
-
-  const title =
-    userInfo.type === 'influencer' ? (
-      <p className="mb-5 font-medium text-xl">
-        Estas marcas podrian interesarte
-      </p>
-    ) : (
-      <p className="mb-5 font-medium text-xl">
-        Estos influencers podrian interesarte
-      </p>
-    );
-
   return (
     <div>
-      {title}
       {areFilters &&
         usersToShow.length > 0 &&
         usersToShow.map((utw) => <PublicationCard user={utw} key={utw} />)}

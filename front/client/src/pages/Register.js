@@ -108,14 +108,6 @@ const Register = () => {
       >
         {({ isSubmitting }) => (
           <Form className="md:w-8/12 flex flex-col">
-            <input
-              id="file"
-              name="file"
-              type="file"
-              onChange={(e) => {
-                setFieldValue(e.currentTarget.files[0]);
-              }}
-            />
             <Field
               type="text"
               name="name"
@@ -134,6 +126,8 @@ const Register = () => {
               component="div"
               className="p-2 text-red-400"
             />
+            {type==='brand' ? <></> : 
+            <div className='flex flex-col'>
             <Field
               type="text"
               name="lastname"
@@ -152,6 +146,8 @@ const Register = () => {
               component="div"
               className="p-2 text-red-400"
             />
+            </div>
+          }
             <Field
               type="text"
               name="instagram"

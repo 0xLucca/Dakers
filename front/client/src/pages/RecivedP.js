@@ -8,34 +8,46 @@ import { FirebaseContext } from '../context/firebaseContext';
 const RecivedP = () => {
     let { id } = useParams();
 
-    const {activePublications} = useContext(FirebaseContext);
+    const {activePublications,allUsers} = useContext(FirebaseContext);
 
     const [thisP, setthisP] = useState(null);
-    const [receivedPropousals, setreceivedPropousals] = useState([]);
+    const [from, setfrom] = useState(null);
+    const [sendAprove, setsendAprove] = useState(null);
 
     const handleThisPublication = (id) => {
-        setthisP(activePublications.filter(p=>p.id===id))
+        setthisP(activePublications.filter(p=>p.id===id)[0])
     }
 
-    const handlePReceived = () => {
-        setreceivedPropousals(thisP.propousals);
-      }
-
-      useEffect(() => {
+    useEffect(() => {
         handleThisPublication(id)
-      }, [id])
+    }, [id])
 
-      useEffect(() => {
+    useEffect(() => {
         console.log(thisP);
-      }, [thisP])
+    }, [thisP])
+
 
     return (
-        <div className="bg-red-500 min-h-screen font-poppins">
-           {thisP !== null && <p> las propuestas de {thisP[0].title} </p>}
+ 
+        <div className="min-h-screen font-poppins">
+            <div>
+                <div className='w-10/12 md:w-8/12 m-auto'>
+                     {thisP !== null && 
+                     <>
+                     <p className='my-8 font-bold text-3xl'>Las propuestas de {thisP.title} </p>
+                     <p className='font-bold text-xl'>{thisP.propousals.desc}</p>
+                     <p className='font-bold text-xl'>Para publicar en:</p>
+                      {thisP.socialMedias.map(sm=> <p className='font-bold text-xl'>{sm}</p>)}
+                      </>
+                     }
+                    <div className='flex mt-5'>
 
-           {thisP !== null && thisP[0].propousals.map(p=><PropouseCard p={p}/>)}
-
-
+                    <button className='px-4 py-1.5 bg-green-500 hover:bg-green-700 transition duration-150 font-semibold rounded text-slate-50' onClick={()=>{}}>aceptar</button>
+                    <button className='mx-2 px-4 py-1.5 bg-red-500 hover:bg-red-700 transition duration-150 font-semibold rounded text-slate-50' onClick={()=>{}}>rechazar</button>
+                    </div>
+                </div>
+            </div>
+           {/*thisP !== null && thisP.propousals.map(p=><PropouseCard p={p}/>)*/}
       </div>
     )
 }
